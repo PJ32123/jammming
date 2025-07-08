@@ -1,26 +1,16 @@
-import React, { useState } from "react";
-import SearchBar from "./components/SearchBar/SearchBar";
-import SearchResults from "./components/SearchResults/SearchResults";
-import Playlist from "./components/Playlist/Playlist";
-import Spotify from "./utils/Spotify";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LoginButton from "./components/LoginButton/LoginButton";
+import Callback from "./pages/Callback";
 
-const App = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [results, setResults] = useState([]);
-  const [playlist, setPlaylist] = useState([]);
-
-  // Wrapping spotify.search in a useCallback to prevent unnecessary re-renders
-  const search = useCallback(Spotify.search, []);
-  const savePlaylist = useCallback(Spotify.savePlaylist, []);
-
+function App() {
   return (
-    <div>
-      <h1>Jammming</h1>
-      <SearchBar setSearchTerm={setSearchTerm} />
-      <SearchResults />
-      <Playlist />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginButton />} />
+        <Route path="/callback" element={<Callback />} />
+      </Routes>
+    </BrowserRouter>
   );
-};
+}
 
 export default App;
