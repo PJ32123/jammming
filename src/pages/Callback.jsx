@@ -3,12 +3,11 @@ import React, { useEffect } from "react";
 const clientId = "6f266cd3efd84e0396843a602bc0fb86";
 const redirectUri = "http://127.0.0.1:5173/callback";
 
-const Callback = () => {
+const Callback = (props) => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
     if (code) {
-      console.log(code);
       getToken(code);
     } else {
       console.error("No code found in URL parameters.");
@@ -17,7 +16,6 @@ const Callback = () => {
 
   const getToken = async (code) => {
     const codeVerifier = sessionStorage.getItem("codeVerifier");
-    console.log(codeVerifier);
     const url = "https://accounts.spotify.com/api/token";
     const payload = {
       method: "POST",
@@ -43,7 +41,9 @@ const Callback = () => {
           "token_expiration",
           Date.now() + response.expires_in * 1000
         );
-        // Optionally redirect to home or show success
+        // Set the session expired state to false
+        props.setSessionExpired(false);
+        // Redirect to home page
         window.location.href = "/";
       } else {
         console.error("Failed to get access token:", response);

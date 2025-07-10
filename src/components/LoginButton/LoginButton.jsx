@@ -9,7 +9,6 @@ function LoginButton() {
   const handleLogin = async () => {
     try {
       const { codeVerifier, codeChallenge } = await PkceFlow();
-      console.log(codeVerifier);
       sessionStorage.setItem("codeVerifier", codeVerifier);
       const scope = "user-read-private user-read-email";
       const authUrl = new URL("https://accounts.spotify.com/authorize");
@@ -23,7 +22,6 @@ function LoginButton() {
       };
 
       authUrl.search = new URLSearchParams(params).toString();
-      console.log(authUrl.toString());
       window.location.href = authUrl.toString();
     } catch (error) {
       console.error("Error during login:", error);

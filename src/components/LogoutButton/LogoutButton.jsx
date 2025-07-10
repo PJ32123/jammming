@@ -4,6 +4,8 @@ const LogoutButton = () => {
   const handleLogout = () => {
     // Clear the access token from local storage
     localStorage.removeItem("access_token");
+    // Clear the token expiration from local storage
+    localStorage.removeItem("token_expiration");
     // Optionally redirect to home or login page
     window.location.href = "/";
   };
