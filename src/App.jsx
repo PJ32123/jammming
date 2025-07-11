@@ -23,8 +23,8 @@ function App() {
 
     const timeout = expirationTime - Date.now();
 
+    // token has expired
     if (timeout <= 0) {
-      // Already expired
       setToken("");
       setExpirationTime(null);
       localStorage.removeItem("access_token");
@@ -33,6 +33,7 @@ function App() {
       return;
     }
 
+    // Set a timeout to clear the token and expiration time after the specified duration
     const timer = setTimeout(() => {
       setToken("");
       setExpirationTime(null);
@@ -50,12 +51,14 @@ function App() {
         <Route
           path="/"
           element={
+            // If session has expired, show message and login button
             sessionExpired ? (
               <div>
                 <p>Your session has expired. Please log in again.</p>
                 <LoginButton />
               </div>
-            ) : token ? (
+            ) : // If token is available, show Home component, otherwise show LoginButton
+            token ? (
               <Home />
             ) : (
               <LoginButton />
@@ -63,6 +66,7 @@ function App() {
           }
         />
         <Route
+          // Callback route to handle authentication response
           path="/callback"
           element={<Callback setSessionExpired={setSessionExpired} />}
         />

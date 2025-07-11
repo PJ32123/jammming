@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-
+// client Id and redirect URI for Spotify OAuth
 const clientId = "6f266cd3efd84e0396843a602bc0fb86";
 const redirectUri = "http://127.0.0.1:5173/callback";
 
 const Callback = (props) => {
+  // Effect that will run when the component mounts and will run getToken if "code" is in URL parameters
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
@@ -14,6 +15,7 @@ const Callback = (props) => {
     }
   }, []);
 
+  // fetches the access token from Spotify using codeVerifier and code and stores it in local storage
   const getToken = async (code) => {
     const codeVerifier = sessionStorage.getItem("codeVerifier");
     const url = "https://accounts.spotify.com/api/token";
@@ -34,6 +36,7 @@ const Callback = (props) => {
     try {
       const body = await fetch(url, payload);
       const response = await body.json();
+      // Stores the access token and token expiration in local storage
       if (response.access_token) {
         localStorage.setItem("access_token", response.access_token);
         // Set the token expiration
@@ -53,6 +56,8 @@ const Callback = (props) => {
     }
   };
 
+  // Render a simple message while logging in
+  // This is returned while the access token is being fetched
   return <div>Logging in...</div>;
 };
 
