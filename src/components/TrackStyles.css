@@ -1,0 +1,40 @@
+/* Track row container */
+.track,
+.playlist-track {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #c59efb;
+  padding-bottom: 8px;
+}
+
+/* Track info block */
+.track-info {
+  flex-grow: 1;
+}
+
+.track-info p {
+  margin: 4px 0;
+}
+
+/* Add/Remove buttons */
+.track-button {
+  background: white;
+  color: #6a0dad;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  height: 32px;
+  min-width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.track-button:hover {
+  background-color: #d8b4f8;
+}

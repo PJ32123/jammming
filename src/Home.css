@@ -1,0 +1,31 @@
+.main-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px; /* fixed gap between panes */
+  justify-content: center;
+  padding: 20px;
+  align-items: flex-start;
+}
+
+.left-pane {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.playlist {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;
+  box-sizing: border-box;
+}
+
+/* Responsive behavior: stack layout on small screens */
+@media (max-width: 768px) {
+  .main-layout {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

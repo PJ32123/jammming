@@ -1,30 +1,31 @@
-// Import React and useState
+// Import React
 import React, { useState } from "react";
+import "./SearchBar.css";
 
 // Declare component function that will create search bar
-const SearchBar = (props) => {
-  const [term, setTerm] = useState("");
+const SearchBar = ({ onSearch }) => {
+  const [query, setQuery] = useState("");
 
   const handleSubmit = (event) => {
     // Prevent the default form submission behavior
     event.preventDefault();
-    // Set the term as the user types in the search bar
-    setTerm(event.target.value);
-    // Call search prop with the current term which will set the search results
-    props.search(term);
-    // Clear the input after submission
-    setTerm(""); // Clear the input after submission
+    // If the query is empty, do not proceed
+    if (query.trim() === "") return;
+    // Call the onSearch function passed as a prop with the current query
+    onSearch(query);
+    // Clear the input field after submission
+    setQuery("");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="search-bar" onSubmit={handleSubmit}>
       <input
-        name="name"
-        id="name"
+        name="query"
+        id="query"
         type="text"
-        value={term}
-        placeholder="Enter A Song, Album, or Artist"
-        onChange={(e) => setTerm(e.target.value)}
+        value={query}
+        placeholder="Enter A Song"
+        onChange={(e) => setQuery(e.target.value)}
         autoComplete="off"
         autoFocus
       />

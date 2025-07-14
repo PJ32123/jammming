@@ -1,0 +1,10 @@
+.search-results {
+  flex: 1;
+  min-width: 300px;
+  background-color: #8641c2;
+  border-radius: 8px;
+  padding: 16px;
+  color: white;
+  box-sizing: border-box; /* Important */
+  overflow-x: hidden;
+}
