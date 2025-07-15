@@ -136,7 +136,11 @@ function Home() {
         <div className="left-pane">
           <SearchBar onSearch={searchSpotify} />
           {searchPerformed && (
-            <SearchResults results={results} onAddTrack={onAddTrack} />
+            <SearchResults
+              results={results}
+              playlistTracks={playlistTracks}
+              onAddTrack={onAddTrack}
+            />
           )}
         </div>
         <Playlist

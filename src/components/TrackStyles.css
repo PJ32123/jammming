@@ -38,3 +38,19 @@
 .track-button:hover {
   background-color: #d8b4f8;
 }
+
+.check-button {
+  background: #5dc02f;
+  color: #6a0dad;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  height: 32px;
+  min-width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

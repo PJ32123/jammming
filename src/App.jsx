@@ -17,6 +17,22 @@ function App() {
   // State to manage session expiration, set to false initially
   const [sessionExpired, setSessionExpired] = useState(false);
 
+  // Const to handle the expiration time of the token
+  const clearAuth = () => {
+    setToken("");
+    setExpirationTime(null);
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("expiration_time");
+    setSessionExpired(true);
+  };
+
+  // Effect to check expiration time and token after component mounts
+  useEffect(() => {
+    if (expirationTime && Date.now() > expirationTime) {
+      clearAuth();
+    }
+  }, []); // ← run only on mount
+
   // Effect to update token and expiration time when time expires
   useEffect(() => {
     if (!token || !expirationTime) return;
@@ -25,21 +41,13 @@ function App() {
 
     // token has expired
     if (timeout <= 0) {
-      setToken("");
-      setExpirationTime(null);
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("expiration_time");
-      setSessionExpired(true);
+      clearAuth();
       return;
     }
 
     // Set a timeout to clear the token and expiration time after the specified duration
     const timer = setTimeout(() => {
-      setToken("");
-      setExpirationTime(null);
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("expiration_time");
-      setSessionExpired(true);
+      clearAuth();
     }, timeout);
 
     return () => clearTimeout(timer);
